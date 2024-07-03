@@ -1,6 +1,12 @@
 .borderBody {
-  border: 5px;
-  border-color: red;
   margin-left: 15%;
   margin-right: 15%;
+}
+
+.borderNavbar {
+  border: 5px;
+  border-color: red;
+  border-style: solid;
+  padding-left: 15%;
+  padding-right: 15%;
 }
