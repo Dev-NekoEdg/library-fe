@@ -1,1 +1,25 @@
-<p>login works!</p>
+<div class="card text-center">
+  <div class="card-header bg-primary-subtle">
+    <h3>Loggin!</h3>
+  </div>
+  <form [formGroup]="loginForm" (ngSubmit)="loginUser()">
+    <div class="card-body">
+      <div class="mb-3">
+        <label class="form-label">Email:</label>
+        <input type="email" class="form-control" formControlName="email" id="exampleFormControlInput1"
+          placeholder="name@example.com" [class.is-invalid]="getValidEmail">
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Password:</label>
+        <input type="password" class="form-control" formControlName="password"
+        [class.is-invalid]="getValidPassword">
+      </div>
+      <br>
+      <input class="btn btn-outline-success" type="submit" value="Login">
+      <br>
+    </div>
+    <div class="card-footer text-body-secondary">
+      <a [routerLink]="['users', 'register']" class="card-link">Registrate aqu&iacute;</a>
+    </div>
+  </form>
+</div>

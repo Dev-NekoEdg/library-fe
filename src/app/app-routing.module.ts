@@ -3,11 +3,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { BooksComponent } from './components/books/books.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
+import { LoginComponent } from './components/login/login.component';
 
 const routes: Routes = [
   {path:"books", component: BooksComponent, pathMatch: "full"},
   {path:"about", component: AboutComponent, pathMatch: "full"},
-  {path:"register", component: RegisterUserComponent, pathMatch: "full"},
+  {path:"users/register", component: RegisterUserComponent, pathMatch: "full"},
+  {path:"login", component: LoginComponent, pathMatch: "full"},
 ];
 
 @NgModule({
