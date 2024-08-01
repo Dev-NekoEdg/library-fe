@@ -1,7 +1,7 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <i class="bi bi-book"></i>
-    <a class="navbar-brand" [routerLink]="['Home']">Navbar</a>
+    <a class="navbar-brand" [routerLink]="['home']">Navbar</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -20,20 +20,23 @@
       </ul>
     </div>
     <div>
-      <div *ngIf="!isLogged">
+      <div *ngIf="!loggedUser.isLoggedIn">
         <button class="btn btn-outline-primary" (click)="loginredirect()">
           Login!
         </button>
       </div>
-      <div *ngIf="isLogged" >
-        <div class="dropdown">
-          <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown button
+      <div *ngIf="loggedUser.isLoggedIn" >
+        <div class="btn-group">
+          <button type="button" class="btn btn-danger
+          dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+            Action
           </button>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><button class="dropdown-item" (ngClick)="logout()">Logout</button></li>
             <li><a class="dropdown-item" href="#">Another action</a></li>
             <li><a class="dropdown-item" href="#">Something else here</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Separated link</a></li>
           </ul>
         </div>
       </div>
