@@ -46,10 +46,6 @@ export class LoginComponent implements OnInit {
 
       const registeredUser = this.service.login(user, pass);
       if (registeredUser) {
-
-        localStorage.setItem(environment.userCookie,
-          JSON.stringify(registeredUser)
-        );
         this.router.navigate(['books']);
       }
     }

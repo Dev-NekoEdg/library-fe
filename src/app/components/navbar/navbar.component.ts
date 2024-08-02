@@ -14,18 +14,22 @@ export class NavbarComponent implements OnInit {
   constructor(private router: Router,
     private loginService: LoginServiceService
   ) {
-    this.loggedUser = this.emptyUser();
+    this.loggedUser = this.verifyUserCookie();
+    console.log({method: 'navbar-constructor', user: this.loggedUser});
   }
 
   ngOnInit(): void {
     this.verifyUserCookie();
   }
 
-  verifyUserCookie():void {
+  verifyUserCookie(): LoggedUser{
+    let userLogged: LoggedUser=  this.emptyUser();
     this.loginService.getLoggedInUser$()
       .subscribe(user => {
-        this.loggedUser = user;
+        userLogged = user;
       });
+
+      return userLogged;
   }
 
   loginredirect() {
@@ -33,8 +37,13 @@ export class NavbarComponent implements OnInit {
   }
 
   logout(): void {
-    console.log('aca');
+    console.log('log out -- aca');
     this.loginService.logout();
+
+    this.loginService.getLoggedInUser$()
+      .subscribe(user => {
+        this.loggedUser = user;
+      });
   }
 
   verifyLoggedUser(): void {

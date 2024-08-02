@@ -10,7 +10,7 @@ export class LoginServiceService {
 
   private defaultUser: LoggedUser;
   private loggedInUser: LoggedUser;
-  private loggedInUser$: BehaviorSubject<LoggedUser>;
+  public loggedInUser$: BehaviorSubject<LoggedUser>;
 
   constructor() {
     this.defaultUser = {
@@ -48,6 +48,9 @@ export class LoginServiceService {
     }
     else {
       this.loggedInUser = this.defaultUser;
+      localStorage.setItem(environment.userCookie, JSON.stringify(this.loggedInUser));
+
+      this.loggedInUser$.next(this.loggedInUser);
       return this.loggedInUser;
     }
   }
