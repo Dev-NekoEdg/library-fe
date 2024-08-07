@@ -1,3 +1,5 @@
 export const environment = {
-  production: true
+  production: true,
+  userCookie: 'LIBRARY_FE_LOGGED_USER',
+  baseApi: ''
 };

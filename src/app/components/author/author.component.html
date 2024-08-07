@@ -1,0 +1,17 @@
+<p>author works!</p>
+<table class="table table-bordered table-hover">
+  <thead>
+    <tr>
+      <th scope="col">Nombre</th>
+      <th scope="col">Apellido</th>
+      <th scope="col">Profesi&oacute;n</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of listAuthors">
+      <td>{{item.name}}</td>
+      <td>{{item.lastName}}</td>
+      <td>{{item.academicDegree}}</td>
+    </tr>
+  </tbody>
+</table>

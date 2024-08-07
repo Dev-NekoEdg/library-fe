@@ -10,6 +10,8 @@ import { AboutComponent } from './components/about/about.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { LoginComponent } from './components/login/login.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AuthorComponent } from './components/author/author.component';
+import { HttpClientModule } from '@angular/common/http'
 
 @NgModule({
   declarations: [
@@ -19,13 +21,15 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NavbarComponent,
     AboutComponent,
     RegisterUserComponent,
-    LoginComponent
+    LoginComponent,
+    AuthorComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -4,6 +4,7 @@ import { BooksComponent } from './components/books/books.component';
 import { AboutComponent } from './components/about/about.component';
 import { RegisterUserComponent } from './components/register-user/register-user.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthorComponent } from './components/author/author.component';
 
 const routes: Routes = [
   {path:"books", component: BooksComponent, pathMatch: "full"},
@@ -11,6 +12,7 @@ const routes: Routes = [
   {path:"home", component: AboutComponent, pathMatch: "full"},
   {path:"users/register", component: RegisterUserComponent, pathMatch: "full"},
   {path:"login", component: LoginComponent, pathMatch: "full"},
+  {path:"authors", component: AuthorComponent, pathMatch: "full"},
 ];
 
 @NgModule({

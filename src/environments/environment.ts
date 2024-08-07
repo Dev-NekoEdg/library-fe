@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  userCookie: 'LIBRARY_FE_LOGGED_USER'
+  userCookie: 'LIBRARY_FE_LOGGED_USER',
+  baseApi: 'https://localhost:7214/api'
 };
 
 /*
