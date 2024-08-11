@@ -18,18 +18,25 @@
     </tbody>
   </table>
 </div>
-<div class="row bi-text-left">
-  <nav aria-label="Page navigation example">
+<div class="row">
+  <nav >
     <ul class="pagination justify-content-center">
-      <li class="page-item disabled">
-        <a class="page-link">Previous</a>
+      <li class="page-item"
+      [ngClass]="filterParams.currentPage == 1 ? 'disabled' : ''">
+        <input type="button" class="page-link"
+          value="Previous" (click)="changePageNextBackButtons(false)">
       </li>
-      <li class="page-item"><a class="page-link" href="#">1</a></li>
-      <li class="page-item"><a class="page-link" href="#">2</a></li>
-      <li class="page-item"><a class="page-link" href="#">3</a></li>
-      <li class="page-item">
-        <a class="page-link" href="#">Next</a>
+      <li *ngFor="let page of filterParams.pages"
+      class="page-item">
+      <input type="button" class="page-link" value="{{page}}" (click)="changePage(page)" >
+    </li>
+      <li class="page-item"
+        [ngClass]="filterParams.currentPage == filterParams.pages.length ? 'disabled' : ''">
+        <input type="button" class="page-link"
+          value="Next"
+          (click)="changePageNextBackButtons(true)" >
       </li>
     </ul>
   </nav>
 </div>
+

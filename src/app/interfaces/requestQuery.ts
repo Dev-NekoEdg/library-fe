@@ -1,5 +1,5 @@
 export interface RequestQuery<T> {
-  pagaSize: number;
+  pageSize: number;
   page: number,
   totalRows: number,
   sort: string,
