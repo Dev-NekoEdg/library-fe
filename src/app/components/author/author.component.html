@@ -1,12 +1,45 @@
-<p>author works!</p>
+<p>
+  author works!
+
+</p>
+
 <div>
 
   <table class="table table-bordered table-hover">
     <thead>
       <tr>
-        <th scope="col">Nombre</th>
-        <th scope="col">Apellido</th>
-        <th scope="col">Profesi&oacute;n</th>
+        <th scope="col" (click)="changeFilterActive(nameColumn)">
+          <div class="d-flex justify-content-between">
+            <span [ngClass]="filterActive == nameColumn ? 'link-primary' : 'link-secondary'">Nombre</span>
+            <button class="text-end"
+              [ngClass]="filterActive == nameColumn  ? 'btn btn-primary btn-sm' : 'btn btn-outline-primary btn-sm'"
+              (click)="changeSortDirection(nameColumn, isSortNameColumn)">
+              <i [ngClass]="isSortNameColumn ? 'bi bi-arrow-up-short' : 'bi bi-arrow-down-short'"></i>
+            </button>
+          </div>
+        </th>
+        <th scope="col" (click)="changeFilterActive(lastNameColumn)">
+          <div class="d-flex justify-content-between">
+            <span [ngClass]="filterActive == lastNameColumn ? 'link-primary' : 'link-secondary'">Apellido</span>
+
+            <button class="btn btn-sm" [ngClass]="filterActive == lastNameColumn ? 'btn-primary' : 'btn-outline-primary'"
+              (click)="changeSortDirection(lastNameColumn, isSortLastNameColumn)">
+              <i [ngClass]="isSortLastNameColumn ? 'bi bi-arrow-up-short' : 'bi bi-arrow-down-short'"></i>
+            </button>
+          </div>
+        </th>
+        <th scope="col" (click)="changeFilterActive(academicDegreeColumn)">
+          <div class="d-flex justify-content-between">
+            <span
+              [ngClass]="filterActive == academicDegreeColumn ? 'link-primary' : 'link-secondary'">Profesi&oacute;n</span>
+
+            <button class="text-end"
+              [ngClass]="filterActive == academicDegreeColumn ? 'btn btn-primary btn-sm' : 'btn btn-outline-primary btn-sm'"
+              (click)="changeSortDirection(academicDegreeColumn, isSortAcademicDegreeColumn)">
+              <i [ngClass]="isSortAcademicDegreeColumn ? 'bi bi-arrow-up-short' : 'bi bi-arrow-down-short'"></i>
+            </button>
+          </div>
+        </th>
       </tr>
     </thead>
     <tbody>
@@ -19,24 +52,17 @@
   </table>
 </div>
 <div class="row">
-  <nav >
+  <nav>
     <ul class="pagination justify-content-center">
-      <li class="page-item"
-      [ngClass]="filterParams.currentPage == 1 ? 'disabled' : ''">
-        <input type="button" class="page-link"
-          value="Previous" (click)="changePageNextBackButtons(false)">
+      <li class="page-item" [ngClass]="filterParams.currentPage == 1 ? 'disabled' : ''">
+        <input type="button" class="page-link" value="Previous" (click)="changePageNextBackButtons(false)">
       </li>
-      <li *ngFor="let page of filterParams.pages"
-      class="page-item">
-      <input type="button" class="page-link" value="{{page}}" (click)="changePage(page)" >
-    </li>
-      <li class="page-item"
-        [ngClass]="filterParams.currentPage == filterParams.pages.length ? 'disabled' : ''">
-        <input type="button" class="page-link"
-          value="Next"
-          (click)="changePageNextBackButtons(true)" >
+      <li *ngFor="let page of filterParams.pages" class="page-item">
+        <input type="button" class="page-link" value="{{page}}" (click)="changePage(page)">
+      </li>
+      <li class="page-item" [ngClass]="filterParams.currentPage == filterParams.pages.length ? 'disabled' : ''">
+        <input type="button" class="page-link" value="Next" (click)="changePageNextBackButtons(true)">
       </li>
     </ul>
   </nav>
 </div>
-

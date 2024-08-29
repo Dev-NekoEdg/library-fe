@@ -13,9 +13,24 @@ export class AuthorComponent implements OnInit {
 
   public listAuthors: Author[] = [];
   public filterParams: AuthorModel;
-  constructor(private service: AuthorService) {
-    this.filterParams = this.loadFilters();
 
+  public filterActive: string;
+
+  public nameColumn: string = queryFilters.columnName;
+  public isSortNameColumn: boolean;
+
+  public lastNameColumn: string = queryFilters.columnLastName;
+  public isSortLastNameColumn: boolean;
+
+  public academicDegreeColumn: string = queryFilters.columnAcademicDegree;
+  public isSortAcademicDegreeColumn: boolean;
+
+  constructor(private service: AuthorService) {
+    this.filterActive = queryFilters.columnName;
+    this.filterParams = this.loadFilters();
+    this.isSortNameColumn = true;
+    this.isSortLastNameColumn = false;
+    this.isSortAcademicDegreeColumn = false;
   }
 
   ngOnInit(): void {
@@ -23,6 +38,7 @@ export class AuthorComponent implements OnInit {
   }
 
   loadAuthor() {
+
     this.getData();
     // this.service.getAll().subscribe((res)=>{
     //   this.listAuthors = res;
@@ -48,13 +64,82 @@ export class AuthorComponent implements OnInit {
     this.getData();
   }
 
-  private getData(){
+  changeSortDirection(field: string, isAsc: boolean): void {
+    // validation for sortDirection.
+    this.isSortNameColumn = !isAsc;
+
+    // switch (field) {
+    //   case queryFilters.columnName:
+    //     if(this.isSortNameColumn === true){
+    //       this.isSortNameColumn = false ;
+    //     }else{
+    //       this.isSortNameColumn = true;
+    //     }
+    //     this.isSortLastNameColumn = false;
+    //     this.isSortAcademicDegreeColumn = false;
+    //     break;
+    //   case queryFilters.columnLastName:
+    //     if(this.isSortLastNameColumn === true){
+    //       this.isSortLastNameColumn = false ;
+    //     }else{
+    //       this.isSortLastNameColumn = true;
+    //     }
+    //     this.isSortNameColumn = true;
+    //     this.isSortAcademicDegreeColumn = true;
+    //     break;
+    //   case queryFilters.columnAcademicDegree:
+    //     if (this.isSortAcademicDegreeColumn) {
+    //        this.isSortAcademicDegreeColumn = false;
+    //     }
+    //     else{
+    //       this.isSortAcademicDegreeColumn = true;
+    //     }
+    //     this.isSortNameColumn = false;
+    //     this.isSortLastNameColumn = false;
+    //     break;
+    // }
+    console.log({
+      isSortNameColumn: this.isSortNameColumn,
+       isSortLastNameColumn: this.isSortLastNameColumn,
+       isSortAcademicDegreeColumn: this.isSortAcademicDegreeColumn,
+       field });
+
+    this.filterParams.sort = field;
+    this.filterParams.sortDirection = isAsc === true ? queryFilters.asc : queryFilters.desc;
+    this.getData();
+  }
+
+  changeFilterActive(newFilter: string): void {
+
+    this.filterActive = newFilter;
+
+    switch (newFilter) {
+      case queryFilters.columnName:
+        this.isSortNameColumn = true;
+        this.isSortLastNameColumn = false;
+        this.isSortAcademicDegreeColumn = false;
+        break;
+      case queryFilters.columnLastName:
+        this.isSortLastNameColumn = true;
+        this.isSortNameColumn = false;
+        this.isSortAcademicDegreeColumn = false;
+        break;
+      case queryFilters.columnAcademicDegree:
+        this.isSortAcademicDegreeColumn = true;
+        this.isSortNameColumn = false;
+        this.isSortLastNameColumn = false;
+        break;
+    }
+
+  }
+
+  private getData() {
     const filter: RequestQuery<Author> = {
       pageSize: this.filterParams.rowsPerPage,
       page: this.filterParams.currentPage,
       totalRows: 0,
       sort: this.filterParams.sort,
-      sortDirection: queryFilters.asc,
+      sortDirection: this.filterParams.sortDirection,
       filter: this.filterParams.filter,
       filterValue: undefined,
       pagesQuantity: 0,
@@ -76,7 +161,6 @@ export class AuthorComponent implements OnInit {
       }
     });
   }
-
 
   private createArrayPages(pagesQuantity: number): number[] {
     let result: number[] = [];
